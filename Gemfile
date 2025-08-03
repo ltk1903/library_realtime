@@ -34,6 +34,9 @@ gem "bootsnap", require: false
 # Authenitication
 gem "devise"
 
+#Image
+gem "image_processing"
+
 # Role permission
 gem "pundit"
 
