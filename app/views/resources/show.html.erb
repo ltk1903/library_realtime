@@ -1,0 +1,38 @@
+<%# app/views/resources/show.html.erb %>
+
+<% if notice %>
+  <div class="alert alert-success">
+    <%= notice %>
+  </div>
+<% end %>
+
+<div class="card mb-4 shadow-sm">
+  <div class="row g-0">
+    <% if @resource.image.attached? %>
+      <div class="col-md-4">
+        <%= image_tag @resource.image.variant(resize_to_limit: [300, 400]), class: "img-fluid rounded-start" %>
+      </div>
+    <% end %>
+
+    <div class="col-md-8">
+      <div class="card-body">
+        <%= render @resource %>
+
+        <div class="mt-4">
+          <% if policy(@resource).update? %>
+            <%= link_to "✏️ Chỉnh sửa", edit_resource_path(@resource), class: "btn btn-outline-primary me-2" %>
+          <% end %>
+
+          <%= link_to "🔙 Trở lại", resources_path, class: "btn btn-outline-secondary" %>
+
+          <% if policy(@resource).destroy? %>
+            <%= button_to "🗑️ Xóa sách", @resource,
+                  method: :delete,
+                  data: { confirm: "Bạn có chắc chắn muốn xóa?" },
+                  class: "btn btn-outline-danger ms-2" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

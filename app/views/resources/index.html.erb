@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Resources" %>
+
+<h1>Resources</h1>
+
+<div id="resources">
+  <% @resources.each do |resource| %>
+    <% if resource.image.attached? %>
+      <%= image_tag resource.image.variant(resize_to_limit: [60, 80]), class: "img-thumbnail" %>
+    <% else %>
+      <span class="text-muted">No image</span>
+    <% end %>
+    <%= render resource %>
+    <p>
+      <%= link_to "Chi tiết", resource %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Thêm sách mới", new_resource_path %>

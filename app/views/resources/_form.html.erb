@@ -1,0 +1,49 @@
+<%= form_with(model: resource, local: true, class: "card card-body shadow-sm") do |form| %>
+  <% if resource.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(resource.errors.count, "lỗi") %> khiến tài nguyên không được lưu:</h4>
+      <ul>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :author, class: "form-label" %>
+    <%= form.text_field :author, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category, class: "form-label" %>
+    <%= form.text_field :category, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :image, "Hình ảnh", class: "form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
+
+    <% if resource.image.attached? %>
+      <div class="mt-2">
+        <p>Ảnh hiện tại:</p>
+        <%= image_tag resource.image.variant(resize_to_limit: [150, 200]), class: "img-thumbnail" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, @statuses.map { |s| [s.titleize, s] }, {}, class: "form-select" %>
+  </div>
+
+  <div class="d-flex justify-content-start gap-2">
+    <%= form.submit "Lưu", class: "btn btn-primary" %>
+    <%= link_to "Hủy", resources_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

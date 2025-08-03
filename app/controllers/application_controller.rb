@@ -10,4 +10,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
   end
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  def user_not_authorized
+    flash[:alert] = "Bạn không có quyền truy cập chức năng này."
+    redirect_to(request.referer || root_path)
+  end
+
 end

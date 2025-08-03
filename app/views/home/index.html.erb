@@ -3,3 +3,5 @@
 <% if user_signed_in? %>
   <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
 <% end %>
+
+<%= link_to "Tài nguyên thư viện", resources_path %>
